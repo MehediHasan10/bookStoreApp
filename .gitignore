@@ -1,0 +1,7 @@
+.env
+node_modules
+
+# As, node module is a big file, we've to put this in a gitignore file. So that, it doesn't get uploaded when we push our website into the git repository. 
+# After cloning this repository from the git, we should use the command "npm install" to work with the node modules again.
+
+#Again, there are some file which contains sensitive information of the project. Such as .env file. In that file we can hold database url, secret etc. 
