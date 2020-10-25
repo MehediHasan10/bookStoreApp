@@ -28,9 +28,13 @@ app.set('view engine','ejs');
 app.use(expressLayouts);
 app.set('layout', 'layouts/layout');
 
-//Routing handler
+//Bring all routes 
 const indexRouter = require('./routes/index');
+const authorRouter = require('./routes/authors');
+
+//Routing handler
 app.use('/', indexRouter);
+app.use('/authors', authorRouter);
 
 //Setup the public folder. WE are telling the express, where the public files are going to be stored.
 app.use(express.static("./public"));
