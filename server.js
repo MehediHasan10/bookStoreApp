@@ -4,6 +4,10 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 
+//parsing the json data
+app.use(express.json());
+app.use(express.urlencoded({ extended: false })); //We're sending the values through url to the server
+
 //Mongodb config and setup
 if(process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
