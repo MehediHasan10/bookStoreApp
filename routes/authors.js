@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Author = require('../models/author'); //This will give access to the Author model.
 
-//All authors 
+//@GET  -  All authors 
 router.get('/',  async (req,res) => {
     let searchOptions = {};
     if(req.query.name != null && req.query.name !== ''){
@@ -11,13 +11,17 @@ router.get('/',  async (req,res) => {
     }
     try {
         const allAuthors = await Author.find(searchOptions);
-        res.render('authors/index', {output: allAuthors});
+        res.render('authors/index',
+            {
+                output: allAuthors, 
+                searchOptions:req.query
+            });
 
     } catch (err) {
         res.redirect('/');
     }
 });
-
+ 
 //@GET  -  Create new author
 router.get('/new', (req,res) => {
     res.render('authors/new', { author : new Author() }); //Instance of Author class. Which will be sent to the ejs file.
@@ -32,7 +36,7 @@ router.post('/new', async (req,res) => {
     try {
         const authorData = await author.save();
         // res.redirect(`/`);
-        res.render('authors/');
+        res.redirect('/authors/new');
     } catch (err) {
         res.render('authors/new', {
             author: author,
