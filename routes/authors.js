@@ -4,8 +4,18 @@ const router = express.Router();
 const Author = require('../models/author'); //This will give access to the Author model.
 
 //All authors 
-router.get('/', (req,res) => {
-    res.render('authors/index');
+router.get('/',  async (req,res) => {
+    let searchOptions = {};
+    if(req.query.name != null && req.query.name !== ''){
+        searchOptions.name = new RegExp(req.query.name, 'i');
+    }
+    try {
+        const allAuthors = await Author.find(searchOptions);
+        res.render('authors/index', {output: allAuthors});
+
+    } catch (err) {
+        res.redirect('/');
+    }
 });
 
 //@GET  -  Create new author
@@ -21,9 +31,14 @@ router.post('/new', async (req,res) => {
 
     try {
         const authorData = await author.save();
-        res.render()
+        // res.redirect(`/`);
+        res.render('authors/');
     } catch (err) {
-        console.log(err);
+        res.render('authors/new', {
+            author: author,
+            errorMessage: 'Error creating author'
+        });
+        // console.log(err);
     }
 
     // res.send(req.body.name);
