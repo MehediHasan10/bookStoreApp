@@ -39,7 +39,7 @@ router.post('/new', async (req,res) => {
         res.redirect('/authors/new');
     } catch (err) {
         res.render('authors/new', {
-            author: author,
+            author: author, //sending this to the ejs file, so that once the value is entered into the input field, after getting the error, the value will remain in the input field. We dont have to re-enter the value. 
             errorMessage: 'Error creating author'
         });
         // console.log(err);

@@ -1,3 +1,37 @@
-1. Get request sends information through query string and Post request does it with body. 
+1. "Get request" sends information through query string and "Post request" does it with body. 
 
 2. 'i' in regular expression function is for case insensitive. We've use regular expression to search the author name. 
+
+-----------------------3. Why do we use "locals.something" ?
+
+4. Package.json ->
+
+"scripts": {
+    "start": "node server.js", 
+    "devStart": "nodemon server.js"
+  },
+
+We've used scripts to run code both in development and production mode. To run the project in producttion environment. ->  "start": "node server.js",
+
+5. server.js ->
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+};
+
+we dont want to load this environment variable unless we're in the development environment. Thats why we'll not load this into the production level environment. We dont want to share these info because they of security purposes.
+
+6. To create  a environment variable (.env), we've to create a development dependency. To do this, 
+    npm i --save-dev dotenv
+    
+7. Sometimes we've error messages in our code and sometimes we have not. 
+
+<% if (locals.errorMessage != null) {%>
+  <%= errorMessage %>
+<% } %>
+
+That is why, we've ensured that there must be a error message (to have the error messagge, the code have to go to the catch block of the author post route) before we can send it to the ejs file. Unless, it'll through an error, when there is no error message. 
+
+8.db.find() method gets the json values as a whole array. Thats why we can use the forEach() method to loop over the found values. 
+
+9. DATABASE_URL = mongodb+srv://el06:test1234@cluster0.a9rlb.mongodb.net/bookStoreApp
+DATABASE_URL = mongodb://localhost:27017/bookStoreApp

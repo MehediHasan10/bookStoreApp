@@ -4,7 +4,7 @@
   "description": "An Online Book store",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js", 
     "devStart": "nodemon server.js"
   },
   "author": "Mehedi Hasan",
@@ -17,6 +17,7 @@
     "mongoose": "^5.10.10"
   },
   "devDependencies": {
+    "dotnet": "^1.1.4",
     "nodemon": "^2.0.6"
   }
 }
