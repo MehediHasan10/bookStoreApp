@@ -20,11 +20,12 @@ const bookSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now()
-    },
+    }, // For date wise books sorting purpose. 
     coverImageName:{
         type: String,
         required: true
     },
+    
     author:{
         type: mongoose.Schema.Types.ObjectId,
         required: true,

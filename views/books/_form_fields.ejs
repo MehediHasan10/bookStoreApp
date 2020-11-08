@@ -1,2 +1,17 @@
-<label>Name</label>
-<input type="text" name="name" value="<%= author.name %>">
+<label>Title</label>
+<input type="text" name="title" value="<%= book.title %>">
+
+<label>Author</label>
+<select>
+    <% authors.forEach((entry) => { %>
+        <% if (entry.id === book.author) { %>
+            <option selected label="<%= entry.name %>" value="<%= entry.id %>">
+            <!-- if a user select an author, we want the value to be selected. thats why we used "selected" attribute. By default it is deselected. which is in the else clause. -->
+
+            <!-- book.author is actually the id. We can recall it from the "book model". -->
+        <% } else { %>
+            <option label="<%= entry.name %>" value="<%= entry.id %>">
+        <% } %>
+    <% }); %>
+    <!-- label are the one the user are going to see in a drop down box. Value is the actual id of the author. which we'll use to the post route. WE've also used it here to check the if condition. -->
+</select>

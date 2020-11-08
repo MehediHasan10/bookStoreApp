@@ -24,7 +24,8 @@ router.get('/',  async (req,res) => {
  
 //@GET  -  Create new author
 router.get('/new', (req,res) => {
-    res.render('authors/new', { author : new Author() }); //Instance of Author class. Which will be sent to the ejs file.
+    const author = new Author();
+    res.render('authors/new', { author : author }); //Instance of Author class. Which will be sent to the ejs file.
 });
 
 //@POST  -  Create new author
