@@ -18,7 +18,7 @@ router.get('/new', async (req,res) => {
         res.render('books/new', {
             authors: authors,
             book: book
-        })
+        });
     } catch (err) {
         console.log(err);
         res.redirect('/books');
