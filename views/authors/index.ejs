@@ -1,7 +1,7 @@
 <h2>Search Author</h2>
 <form action="/authors" method="GET">
     <label>Name</label>
-    <input type="text" name="name" value="<%= searchOptions.name %>">
+    <input id="searchName" type="text" name="name" value="<%= searchOptions.name %>">
     <button type="submit">Search</button>
 </form>
 <br> 
@@ -9,3 +9,36 @@
 <% output.forEach((entry) => { %>
     <div> <%= entry.name %> </div>
 <% }) %>
+
+
+<script>
+
+    $(document).ready(function() {
+        $('#searchName').autocomplete({
+            source: function(req, res) {
+                $.ajax({
+                    url: "/authors/auto",
+                    dataType: "jsonp",
+                    type: "GET",
+                    data: req,
+                    success: function(data){
+                        //alert(data);
+                        res(data);
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                });
+            },
+            minLength: 1,
+            select: function(event, ui) {            
+                if(ui.item){
+                    $("#searchName").text(ui.item.label);
+                }
+            }
+        });
+    });
+
+</script>
+
+

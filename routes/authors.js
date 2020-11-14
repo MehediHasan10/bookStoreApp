@@ -21,6 +21,33 @@ router.get('/',  async (req,res) => {
         res.redirect('/');
     }
 });
+
+router.get('/auto', (req, res) => {
+    //console.log("aaa");
+    var regex = new RegExp(req.query["term"], 'i');
+
+    var  allAuthors = Author.find({name: regex}, {"name": 1}).limit(20);
+    allAuthors.exec(function(err, data) {
+
+        //console.log(data);
+        var result = [];
+        if (!err) {
+             if(data && data.length && data.length>0){
+                 data.forEach(user => {
+                     let obj = {
+                         id: user._id,
+                         label: user.name
+                     };
+                     result.push(obj);
+                 });
+            }
+            //console.log(result);
+            res.jsonp(result);
+
+        }
+    });
+
+});
  
 //@GET  -  Create new author
 router.get('/new', (req,res) => {
